@@ -1,69 +1,94 @@
-const express = require('express');
-const cors = require('cors');
-const morgan = require('morgan');
-const swaggerUi = require('swagger-ui-express');
-const swaggerSpec = require('./config/swagger');
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./config/swagger");
 
 // Import routes
-const productRoutes = require('./routes/productRoutes');
-const cartRoutes = require('./routes/cartRoutes');
-const favoriteRoutes = require('./routes/favoriteRoutes');
+const productRoutes = require("./routes/productRoutes");
+const cartRoutes = require("./routes/cartRoutes");
+const favoriteRoutes = require("./routes/favoriteRoutes");
 
 // Import middleware
-const errorHandler = require('./middleware/errorHandler');
-const logger = require('./utils/logger');
+const errorHandler = require("./middleware/errorHandler");
+const logger = require("./utils/logger");
 
 const app = express();
 
 // Middleware
 // Enable CORS for all origins (important for deployed frontend)
-app.use(cors({
-  origin: '*', // Allow all origins
-  credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(
+  cors({
+    origin: "*", // Allow all origins
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Morgan logging middleware with custom format
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms', {
-  stream: {
-    write: (message) => logger.info(message.trim())
-  }
-}));
+app.use(
+  morgan(":method :url :status :res[content-length] - :response-time ms", {
+    stream: {
+      write: (message) => logger.info(message.trim()),
+    },
+  })
+);
 
 // API Documentation
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Welcome route
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.json({
-    message: 'Welcome to E-commerce Backend API! 🛒',
-    version: '1.0.0',
-    documentation: '/api-docs',
+    message: "Welcome to E-commerce Backend API! 🛒",
+    version: "1.0.0",
+    documentation: "/api-docs",
     endpoints: {
-      products: '/products',
-      cart: '/api/cart',
-      favorites: '/api/favorites'
-    }
+      products: "/products",
+      cart: "/api/cart",
+      favorites: "/api/favorites",
+    },
   });
 });
 
+// Seed endpoint (for manual seeding on production)
+app.post("/seed", async (req, res) => {
+  try {
+    const { seedDatabase } = require('./data/seedData');
+    const result = await seedDatabase();
+    logger.info(`Manual seed triggered: ${result.length} products added`);
+    res.status(200).json({
+      success: true,
+      message: `Successfully seeded ${result.length} products`,
+      count: result.length
+    });
+  } catch (error) {
+    logger.error('Error during manual seeding:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Seeding failed',
+      error: error.message
+    });
+  }
+});
+
 // Routes
-app.use('/products', productRoutes);
-app.use('/api/cart', cartRoutes);
-app.use('/cart', cartRoutes); // Alternative endpoint as mentioned in requirements
-app.use('/api/favorites', favoriteRoutes);
-app.use('/favorites', favoriteRoutes); // Alternative endpoint as mentioned in requirements
+app.use("/products", productRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/cart", cartRoutes); // Alternative endpoint as mentioned in requirements
+app.use("/api/favorites", favoriteRoutes);
+app.use("/favorites", favoriteRoutes); // Alternative endpoint as mentioned in requirements
 
 // 404 handler
-app.use('*', (req, res) => {
+app.use("*", (req, res) => {
   logger.warn(`404 - Route not found: ${req.method} ${req.originalUrl}`);
   res.status(404).json({
     success: false,
-    message: 'Route not found',
-    path: req.originalUrl
+    message: "Route not found",
+    path: req.originalUrl,
   });
 });
 
@@ -71,4 +96,3 @@ app.use('*', (req, res) => {
 app.use(errorHandler);
 
 module.exports = app;
-
