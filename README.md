@@ -2,6 +2,18 @@
 
 A comprehensive e-commerce backend application built with Node.js, Express.js, and MongoDB. This project provides a robust REST API for managing products, shopping cart, and user favorites with proper logging, validation, and API documentation.
 
+## 🌐 Live Deployment
+
+**Live API:** https://ecommerce-backend-1-uszm.onrender.com  
+**Swagger UI (API Docs):** https://ecommerce-backend-1-uszm.onrender.com/api-docs  
+**Hosted on:** Render.com  
+**Database:** MongoDB Atlas (Cloud)
+
+### Quick Links for Testing
+- **Get All Products:** https://ecommerce-backend-1-uszm.onrender.com/products?limit=60
+- **API Documentation:** https://ecommerce-backend-1-uszm.onrender.com/api-docs
+- **Sample Data:** 60 products across 6 categories (electronics, clothing, books, home, sports, toys)
+
 ## 🚀 Features
 
 - **Product Management**: Get all products, filter by category, search functionality
@@ -226,6 +238,41 @@ LOG_LEVEL=info
 - CORS configuration
 - Environment variable protection
 - MongoDB injection prevention
+
+## 🚀 Deployment Information
+
+### Live Deployment (Render.com)
+- **Service Name:** ecommerce-backend
+- **Platform:** Render.com
+- **Live URL:** https://ecommerce-backend-1-uszm.onrender.com
+- **Database:** MongoDB Atlas (Cloud)
+- **Auto-Deployment:** Enabled via GitHub integration
+
+### Database
+- **Provider:** MongoDB Atlas
+- **Cluster:** cluster0.kvcaion.mongodb.net
+- **Database Name:** ecommerce_db
+- **Total Products:** 60 sample products across 6 categories
+
+### How to Access
+1. **Swagger UI (Recommended for testing):**
+   ```
+   https://ecommerce-backend-1-uszm.onrender.com/api-docs
+   ```
+   - Interactive API documentation
+   - Live endpoint testing
+   - Full request/response examples
+
+2. **Direct API Calls:**
+   ```bash
+   # Get all products (limit to 60)
+   curl https://ecommerce-backend-1-uszm.onrender.com/products?limit=60
+   
+   # Add to cart
+   curl -X POST https://ecommerce-backend-1-uszm.onrender.com/api/cart \
+     -H "Content-Type: application/json" \
+     -d '{"productId":"PRODUCT_ID","quantity":2}'
+   ```
 
 ## 🤝 Contributing
 
