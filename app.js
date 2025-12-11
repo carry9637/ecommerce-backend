@@ -57,20 +57,20 @@ app.get("/", (req, res) => {
 // Seed endpoint (for manual seeding on production)
 app.post("/seed", async (req, res) => {
   try {
-    const { seedDatabase } = require('./data/seedData');
+    const { seedDatabase } = require("./data/seedData");
     const result = await seedDatabase();
     logger.info(`Manual seed triggered: ${result.length} products added`);
     res.status(200).json({
       success: true,
       message: `Successfully seeded ${result.length} products`,
-      count: result.length
+      count: result.length,
     });
   } catch (error) {
-    logger.error('Error during manual seeding:', error);
+    logger.error("Error during manual seeding:", error);
     res.status(500).json({
       success: false,
-      message: 'Seeding failed',
-      error: error.message
+      message: "Seeding failed",
+      error: error.message,
     });
   }
 });

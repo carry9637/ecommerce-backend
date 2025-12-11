@@ -10,6 +10,7 @@ A comprehensive e-commerce backend application built with Node.js, Express.js, a
 **Database:** MongoDB Atlas (Cloud)
 
 ### Quick Links for Testing
+
 - **Get All Products:** https://ecommerce-backend-1-uszm.onrender.com/products?limit=60
 - **API Documentation:** https://ecommerce-backend-1-uszm.onrender.com/api-docs
 - **Sample Data:** 60 products across 6 categories (electronics, clothing, books, home, sports, toys)
@@ -64,17 +65,20 @@ ecommerce-backend/
 ## 🛠️ Installation & Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone <repository-url>
    cd ecommerce-backend
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up environment variables**
+
    ```bash
    cp .env.example .env
    # Edit .env with your configuration
@@ -84,15 +88,17 @@ ecommerce-backend/
    Make sure MongoDB is running on your system or update the connection string in .env
 
 5. **Seed the database** (Optional)
+
    ```bash
    node scripts/seed.js
    ```
 
 6. **Start the server**
+
    ```bash
    # Development mode
    npm run dev
-   
+
    # Production mode
    npm start
    ```
@@ -104,16 +110,19 @@ Once the server is running, visit `http://localhost:3000/api-docs` to view the i
 ## 🔗 API Endpoints
 
 ### Products
+
 - `GET /products` - Get all products
 - `GET /products/:category` - Get products by category
 - `GET /products/product/:id` - Get single product by ID
 
 ### Cart
+
 - `POST /api/cart` - Add product to cart
 - `GET /cart` - Get cart items
 - `DELETE /api/cart/:productId` - Remove product from cart
 
 ### Favorites
+
 - `POST /api/favorites` - Add product to favorites
 - `GET /favorites` - Get favorite items
 - `DELETE /api/favorites/:productId` - Remove product from favorites
@@ -121,6 +130,7 @@ Once the server is running, visit `http://localhost:3000/api-docs` to view the i
 ## 📋 Request/Response Examples
 
 ### Add to Cart
+
 ```bash
 POST /api/cart
 Content-Type: application/json
@@ -133,6 +143,7 @@ Content-Type: application/json
 ```
 
 ### Response
+
 ```json
 {
   "success": true,
@@ -155,6 +166,7 @@ Content-Type: application/json
 ## 🧪 Testing
 
 Run the test suite:
+
 ```bash
 npm test
 ```
@@ -162,6 +174,7 @@ npm test
 ## 📝 Logging
 
 The application uses Winston for logging:
+
 - **Error logs**: `logs/error.log`
 - **Combined logs**: `logs/combined.log`
 - **Console output**: Development mode only
@@ -169,6 +182,7 @@ The application uses Winston for logging:
 ## 🔧 Configuration
 
 ### Environment Variables
+
 ```env
 MONGODB_URI=mongodb://localhost:27017/ecommerce_db
 PORT=3000
@@ -178,6 +192,7 @@ LOG_LEVEL=info
 ```
 
 ### MongoDB Collections
+
 - **products**: Product catalog
 - **carts**: User shopping carts
 - **favorites**: User favorite products
@@ -185,16 +200,19 @@ LOG_LEVEL=info
 ## 🚀 Deployment
 
 ### Vercel Deployment
+
 1. Install Vercel CLI: `npm i -g vercel`
 2. Run: `vercel --prod`
 3. Configure environment variables in Vercel dashboard
 
 ### Netlify Deployment
+
 1. Build the project: `npm run build`
 2. Deploy to Netlify via GitHub integration
 3. Configure environment variables
 
 ### Render Deployment
+
 1. Connect GitHub repository
 2. Set build command: `npm install`
 3. Set start command: `npm start`
@@ -203,6 +221,7 @@ LOG_LEVEL=info
 ## 📊 Database Schema
 
 ### Product Schema
+
 ```javascript
 {
   name: String (required),
@@ -218,6 +237,7 @@ LOG_LEVEL=info
 ```
 
 ### Cart Schema
+
 ```javascript
 {
   userId: String (default: 'guest'),
@@ -242,6 +262,7 @@ LOG_LEVEL=info
 ## 🚀 Deployment Information
 
 ### Live Deployment (Render.com)
+
 - **Service Name:** ecommerce-backend
 - **Platform:** Render.com
 - **Live URL:** https://ecommerce-backend-1-uszm.onrender.com
@@ -249,25 +270,30 @@ LOG_LEVEL=info
 - **Auto-Deployment:** Enabled via GitHub integration
 
 ### Database
+
 - **Provider:** MongoDB Atlas
 - **Cluster:** cluster0.kvcaion.mongodb.net
 - **Database Name:** ecommerce_db
 - **Total Products:** 60 sample products across 6 categories
 
 ### How to Access
+
 1. **Swagger UI (Recommended for testing):**
+
    ```
    https://ecommerce-backend-1-uszm.onrender.com/api-docs
    ```
+
    - Interactive API documentation
    - Live endpoint testing
    - Full request/response examples
 
 2. **Direct API Calls:**
+
    ```bash
    # Get all products (limit to 60)
    curl https://ecommerce-backend-1-uszm.onrender.com/products?limit=60
-   
+
    # Add to cart
    curl -X POST https://ecommerce-backend-1-uszm.onrender.com/api/cart \
      -H "Content-Type: application/json" \
@@ -289,6 +315,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 👨‍💻 Author
 
 **Student Developer**
+
 - Email: student@example.com
 - GitHub: [@studentdev](https://github.com/studentdev)
 
