@@ -15,6 +15,10 @@ const options = {
     },
     servers: [
       {
+        url: "https://ecommerce-backend-1-uszm.onrender.com",
+        description: "Production server (Live)",
+      },
+      {
         url: "http://localhost:3000",
         description: "Development server",
       },
